@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.arctouch.codechallenge.R;
 import com.arctouch.codechallenge.api.TmdbApi;
 import com.arctouch.codechallenge.base.BaseActivity;
 import com.arctouch.codechallenge.data.Cache;
+import com.arctouch.codechallenge.details.DetailsScreenFragment;
 import com.arctouch.codechallenge.model.Genre;
 import com.arctouch.codechallenge.model.Movie;
 
@@ -20,6 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeActivity extends BaseActivity {
 
+    private FrameLayout frameLayout;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
 
@@ -28,6 +31,7 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
 
+        this.frameLayout = findViewById(R.id.frameLayout);
         this.recyclerView = findViewById(R.id.recyclerView);
         this.progressBar = findViewById(R.id.progressBar);
 
@@ -44,8 +48,18 @@ public class HomeActivity extends BaseActivity {
                         }
                     }
 
-                    recyclerView.setAdapter(new HomeAdapter(response.results));
+                    recyclerView.setAdapter(new HomeAdapter(response.results, onMovieClickListener));
                     progressBar.setVisibility(View.GONE);
                 });
     }
+
+    private View.OnClickListener onMovieClickListener = view -> {
+        recyclerView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+        frameLayout.setVisibility(View.VISIBLE);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayout, new DetailsScreenFragment())
+                .addToBackStack(null)
+                .commit();
+    };
 }

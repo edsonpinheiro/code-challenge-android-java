@@ -3,6 +3,7 @@ package com.arctouch.codechallenge.model;
 import com.squareup.moshi.Json;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Movie {
     public int id;
@@ -26,17 +27,17 @@ public class Movie {
         Movie movie = (Movie) o;
 
         if (id != movie.id) return false;
-        if (title != null ? !title.equals(movie.title) : movie.title != null) return false;
-        if (overview != null ? !overview.equals(movie.overview) : movie.overview != null)
+        if (!Objects.equals(title, movie.title)) return false;
+        if (!Objects.equals(overview, movie.overview))
             return false;
-        if (genres != null ? !genres.equals(movie.genres) : movie.genres != null) return false;
-        if (genreIds != null ? !genreIds.equals(movie.genreIds) : movie.genreIds != null)
+        if (!Objects.equals(genres, movie.genres)) return false;
+        if (!Objects.equals(genreIds, movie.genreIds))
             return false;
-        if (posterPath != null ? !posterPath.equals(movie.posterPath) : movie.posterPath != null)
+        if (!Objects.equals(posterPath, movie.posterPath))
             return false;
-        if (backdropPath != null ? !backdropPath.equals(movie.backdropPath) : movie.backdropPath != null)
+        if (!Objects.equals(backdropPath, movie.backdropPath))
             return false;
-        return releaseDate != null ? releaseDate.equals(movie.releaseDate) : movie.releaseDate == null;
+        return Objects.equals(releaseDate, movie.releaseDate);
     }
 
     @Override
