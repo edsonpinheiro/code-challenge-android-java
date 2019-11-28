@@ -1,5 +1,6 @@
 package com.arctouch.codechallenge.home;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arctouch.codechallenge.R;
+import com.arctouch.codechallenge.details.DetailsScreenFragment;
 import com.arctouch.codechallenge.model.Movie;
 import com.arctouch.codechallenge.util.MovieImageUrlBuilder;
 import com.bumptech.glide.Glide;
@@ -18,13 +20,13 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
-
+    private Activity activity;
     private List<Movie> movies;
-    private View.OnClickListener onMovieClickListener;
 
-    public HomeAdapter(List<Movie> movies, View.OnClickListener onMovieClickListener) {
+    public HomeAdapter(Activity activity, List<Movie> movies) {
+        this.activity = activity;
         this.movies = movies;
-        this.onMovieClickListener = onMovieClickListener;
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -74,6 +76,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(movies.get(position));
-        holder.itemView.setOnClickListener(onMovieClickListener);
+        holder.itemView.setOnClickListener(view -> {
+            ((HomeActivity) activity).openFragment(new DetailsScreenFragment());
+        });
     }
 }
