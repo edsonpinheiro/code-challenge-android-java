@@ -25,9 +25,9 @@ public class HomeScreenFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.home_screen_fragment, container, false);
-            presenter = new HomePresenter(this);
             configComponents();
-            populateRecyclerView();
+            presenter = new HomePresenter(this);
+            presenter.downloadUpcomingMovies();
         }
         return rootView;
     }
@@ -37,13 +37,12 @@ public class HomeScreenFragment extends Fragment {
         progressBar = rootView.findViewById(R.id.progressBar);
     }
 
-    private void populateRecyclerView() {
-        recyclerView.setAdapter(presenter.getHomeAdapter());
+    public void populateRecyclerView(HomeAdapter homeAdapter) {
+        recyclerView.setAdapter(homeAdapter);
     }
 
-    public void showList(boolean show) {
-        recyclerView.setVisibility(show ? View.VISIBLE : View.GONE);
-        progressBar.setVisibility(show ? View.GONE : View.VISIBLE);
+    public void showList() {
+        progressBar.setVisibility(View.GONE);
     }
 
 }

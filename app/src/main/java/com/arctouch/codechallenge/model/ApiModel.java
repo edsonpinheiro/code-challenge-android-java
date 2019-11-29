@@ -9,15 +9,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class ApiModel {
 
-    private TmdbApi api = new Retrofit.Builder()
-            .baseUrl(TmdbApi.URL)
-            .client(new OkHttpClient.Builder().build())
-            .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(TmdbApi.class);
-
-    public TmdbApi getApi() {
-        return api;
+    public static TmdbApi getApi() {
+        return new Retrofit.Builder()
+                .baseUrl(TmdbApi.URL)
+                .client(new OkHttpClient.Builder().build())
+                .addConverterFactory(MoshiConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+                .create(TmdbApi.class);
     }
 }

@@ -13,16 +13,13 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomePresenter {
     private HomeScreenFragment view;
-    private ApiModel apiModel;
-    private HomeAdapter homeAdapter;
 
     public HomePresenter(HomeScreenFragment view) {
         this.view = view;
-        apiModel = new ApiModel();
     }
 
-    public HomeAdapter getHomeAdapter() {
-        apiModel.getApi().upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, 1L, TmdbApi.DEFAULT_REGION)
+    public void downloadUpcomingMovies() {
+        ApiModel.getApi().upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, 1L, TmdbApi.DEFAULT_REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
@@ -34,9 +31,8 @@ public class HomePresenter {
                             }
                         }
                     }
-                    view.showList(true);
-                    homeAdapter = new HomeAdapter(view.getActivity(), response.results);
+                    view.populateRecyclerView(new HomeAdapter(view.getActivity(), response.results));
+                    view.showList();
                 });
-        return homeAdapter;
     }
 }
