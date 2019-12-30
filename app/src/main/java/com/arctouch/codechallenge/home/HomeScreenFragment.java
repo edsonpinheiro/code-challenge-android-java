@@ -25,8 +25,8 @@ public class HomeScreenFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.home_screen_fragment, container, false);
-            configComponents();
             presenter = new HomePresenter(this);
+            configComponents();
             presenter.downloadUpcomingMovies();
         }
         return rootView;

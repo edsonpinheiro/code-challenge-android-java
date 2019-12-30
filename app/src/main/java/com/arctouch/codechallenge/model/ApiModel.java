@@ -9,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 
 public class ApiModel {
 
-    public static TmdbApi getApi() {
+    public TmdbApi getApi() {
         return new Retrofit.Builder()
                 .baseUrl(TmdbApi.URL)
                 .client(new OkHttpClient.Builder().build())

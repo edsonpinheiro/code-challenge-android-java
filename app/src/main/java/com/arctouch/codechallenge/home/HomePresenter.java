@@ -13,13 +13,15 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomePresenter {
     private HomeScreenFragment view;
+    private ApiModel apiModel;
 
     public HomePresenter(HomeScreenFragment view) {
         this.view = view;
+        apiModel = new ApiModel();
     }
 
     public void downloadUpcomingMovies() {
-        ApiModel.getApi().upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, 1L, TmdbApi.DEFAULT_REGION)
+        apiModel.getApi().upcomingMovies(TmdbApi.API_KEY, TmdbApi.DEFAULT_LANGUAGE, 1L, TmdbApi.DEFAULT_REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
