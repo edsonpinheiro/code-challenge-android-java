@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="336dp"
         android:layout_marginBottom="8dp"
         android:text="@string/title"
         android:textSize="30sp"
@@ -65,12 +64,10 @@
         android:id="@+id/genresTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="228dp"
         android:layout_marginBottom="312dp"
         android:text="TextView"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/releaseDateTextView"
         app:layout_constraintStart_toStartOf="@+id/titleGenresTextView"
         app:layout_constraintTop_toBottomOf="@+id/titleGenresTextView" />
 
@@ -83,7 +80,7 @@
         android:textAlignment="textEnd"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/releaseDateTextView"
-        app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titleGenresTextView"
         app:layout_constraintTop_toBottomOf="@+id/overviewTextView" />
 
@@ -91,13 +88,12 @@
         android:id="@+id/releaseDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginEnd="36dp"
         android:layout_marginBottom="312dp"
         android:text="TextView"
         android:textAlignment="textEnd"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/titleReleaseDateTextView"
-        app:layout_constraintStart_toEndOf="@+id/genresTextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleReleaseDateTextView" />
 </android.support.constraint.ConstraintLayout>
