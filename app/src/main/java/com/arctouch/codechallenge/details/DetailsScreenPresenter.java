@@ -2,32 +2,33 @@ package com.arctouch.codechallenge.details;
 
 import android.text.TextUtils;
 
-import com.arctouch.codechallenge.model.Movie;
+import com.arctouch.codechallenge.factory.ModelFactory;
+import com.arctouch.codechallenge.model.MovieModel;
 
 public class DetailsScreenPresenter {
-    private Movie selectedMovie;
+    private MovieModel movieModel;
 
-    public void setSelectedMovie(Movie movie) {
-        selectedMovie = movie;
+    public DetailsScreenPresenter() {
+        movieModel = ModelFactory.getMovieModel();
     }
 
     public String getBackdropPath() {
-        return selectedMovie.backdropPath;
+        return movieModel.getSelectedMovie().backdropPath;
     }
 
     public String getTitle() {
-        return selectedMovie.title;
+        return movieModel.getSelectedMovie().title;
     }
 
     public String getOverview() {
-        return selectedMovie.overview;
+        return movieModel.getSelectedMovie().overview;
     }
 
     public String getGenres() {
-        return TextUtils.join(", ", selectedMovie.genres);
+        return TextUtils.join(", ", movieModel.getSelectedMovie().genres);
     }
 
     public String getReleaseDate() {
-        return selectedMovie.releaseDate;
+        return movieModel.getSelectedMovie().releaseDate;
     }
 }

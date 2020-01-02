@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.arctouch.codechallenge.R;
 import com.arctouch.codechallenge.details.DetailsScreenFragment;
+import com.arctouch.codechallenge.factory.ModelFactory;
 import com.arctouch.codechallenge.model.Movie;
+import com.arctouch.codechallenge.model.MovieModel;
 import com.arctouch.codechallenge.util.MovieImageUrlBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -77,9 +79,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(movies.get(position));
         holder.itemView.setOnClickListener(view -> {
-            DetailsScreenFragment detailsScreenFragment = new DetailsScreenFragment();
-            detailsScreenFragment.setSelectedMovie(movies.get(position));
-            ((HomeActivity) activity).openFragment(detailsScreenFragment);
+            ModelFactory.getMovieModel().setSelectedMovie(movies.get(position));
+            ((HomeActivity) activity).openFragment(new DetailsScreenFragment());
         });
     }
 }

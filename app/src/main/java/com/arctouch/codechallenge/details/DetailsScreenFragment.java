@@ -39,10 +39,6 @@ public class DetailsScreenFragment extends Fragment {
         return rootView;
     }
 
-    public void setSelectedMovie(Movie movie) {
-        presenter.setSelectedMovie(movie);
-    }
-
     private void initComponents() {
         backdropImageView =  rootView.findViewById(R.id.backdropImageView);
         titleTextView = rootView.findViewById(R.id.titleTextView);
