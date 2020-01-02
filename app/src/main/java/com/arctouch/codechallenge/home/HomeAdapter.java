@@ -1,5 +1,6 @@
 package com.arctouch.codechallenge.home;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arctouch.codechallenge.R;
+import com.arctouch.codechallenge.details.DetailsScreenFragment;
+import com.arctouch.codechallenge.factory.ModelFactory;
 import com.arctouch.codechallenge.model.Movie;
+import com.arctouch.codechallenge.model.MovieModel;
 import com.arctouch.codechallenge.util.MovieImageUrlBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -18,11 +22,13 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
-
+    private Activity activity;
     private List<Movie> movies;
 
-    public HomeAdapter(List<Movie> movies) {
+    public HomeAdapter(Activity activity, List<Movie> movies) {
+        this.activity = activity;
         this.movies = movies;
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -39,7 +45,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             titleTextView = itemView.findViewById(R.id.titleTextView);
             genresTextView = itemView.findViewById(R.id.genresTextView);
             releaseDateTextView = itemView.findViewById(R.id.releaseDateTextView);
-            posterImageView = itemView.findViewById(R.id.posterImageView);
+            posterImageView = itemView.findViewById(R.id.backdropImageView);
         }
 
         public void bind(Movie movie) {
@@ -48,7 +54,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             releaseDateTextView.setText(movie.releaseDate);
 
             String posterPath = movie.posterPath;
-            if (TextUtils.isEmpty(posterPath) == false) {
+            if (!TextUtils.isEmpty(posterPath)) {
                 Glide.with(itemView)
                         .load(movieImageUrlBuilder.buildPosterUrl(posterPath))
                         .apply(new RequestOptions().placeholder(R.drawable.ic_image_placeholder))
@@ -72,5 +78,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(movies.get(position));
+        holder.itemView.setOnClickListener(view -> {
+            ModelFactory.getMovieModel().setSelectedMovie(movies.get(position));
+            ((HomeActivity) activity).openFragment(new DetailsScreenFragment());
+        });
     }
 }
