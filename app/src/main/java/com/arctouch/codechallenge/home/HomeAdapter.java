@@ -43,7 +43,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             titleTextView = itemView.findViewById(R.id.titleTextView);
             genresTextView = itemView.findViewById(R.id.genresTextView);
             releaseDateTextView = itemView.findViewById(R.id.releaseDateTextView);
-            posterImageView = itemView.findViewById(R.id.posterImageView);
+            posterImageView = itemView.findViewById(R.id.backdropImageView);
         }
 
         public void bind(Movie movie) {
@@ -77,7 +77,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(movies.get(position));
         holder.itemView.setOnClickListener(view -> {
-            ((HomeActivity) activity).openFragment(new DetailsScreenFragment());
+            DetailsScreenFragment detailsScreenFragment = new DetailsScreenFragment();
+            detailsScreenFragment.setSelectedMovie(movies.get(position));
+            ((HomeActivity) activity).openFragment(detailsScreenFragment);
         });
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/backdropImageView"
         android:layout_width="384dp"
         android:layout_height="194dp"
         android:layout_marginStart="16dp"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/overviewTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/backdropImageView" />
 
     <TextView
         android:id="@+id/overviewTextView"
